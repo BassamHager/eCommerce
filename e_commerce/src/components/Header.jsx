@@ -1,7 +1,7 @@
 import React from "react";
-import "./styles.scss";
+import "./Header.scss";
 
-import Logo from "../../assets/BisoLogo.jpeg";
+import Logo from "../assets/BisoLogo.jpeg";
 
 const Header = () => {
   return (
