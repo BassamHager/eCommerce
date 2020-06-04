@@ -13,6 +13,7 @@ body,
 #root,
 .App {
   height: 100%;
+  background: #333;
 }
 
 *,
@@ -47,5 +48,20 @@ a:hover {
   max-width: 1450px;
   padding: 0 10px;
   margin: 0 auto;
-  height: calc(100% - 6.5rem);
+  height: calc(100% - 6.5rem - 5.8rem);
+  background: #333;
 }
+
+.center {
+  text-align: center;
+}
+
+.bg {
+  background: #333;
+  color: mintcream;
+}
+
+// @mixin bg($bg, $color) {
+//   background: $bg;
+//   color: $color;
+// }
