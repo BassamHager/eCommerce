@@ -21,6 +21,9 @@ const Header = () => {
             <li>
               <Link to="/auth">Registration</Link>
             </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </div>
       </div>
