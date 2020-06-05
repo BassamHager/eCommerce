@@ -1,14 +1,9 @@
 import React, { memo } from "react";
 import "./Auth.scss";
+import SignUp from "../components/SignUp";
 
 function areEqual(prevProps, nextProps) {}
 
-const Auth = () => {
-  return (
-    <div className="auth">
-      <h1>Auth</h1>
-    </div>
-  );
-};
+const Auth = () => <SignUp />;
 
 export default memo(Auth, areEqual);
