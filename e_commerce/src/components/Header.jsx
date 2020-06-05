@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // configurations
 import { auth } from "../firebase/utils";
 // components
-import Button from "./forms/Button";
+// import Button from "./forms/Button";
 // assets
 import Logo from "../assets/BisoLogo.jpeg";
 

@@ -10,17 +10,21 @@ import Auth from "./pages/Auth";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 // configurations
-import { auth } from "./firebase/utils";
+import { auth, handleUserProfile } from "./firebase/utils";
 
 const App = () => {
   const { currentUser, setCurrentUser } = useContext(AppContext);
 
   const authUser = useCallback(() => {
-    auth.onAuthStateChanged((userAuth) => {
-      if (!userAuth) setCurrentUser(null);
-      else {
-        setCurrentUser(userAuth);
+    auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await handleUserProfile(userAuth);
+        console.log(userRef);
+        userRef.onSnapshot((snapshot) => {
+          setCurrentUser({ id: snapshot.id, ...snapshot.data() });
+        });
       }
+      setCurrentUser(null);
     });
   }, [setCurrentUser]);
 
