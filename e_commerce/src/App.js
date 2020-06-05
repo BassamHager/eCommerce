@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useCallback } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "./default.scss";
 // context
 import { AppContext } from "./context/app_context";
@@ -24,6 +24,8 @@ const App = () => {
     });
   }, [setCurrentUser]);
 
+  const login = () => (currentUser ? <Redirect to="/" /> : <Login />);
+
   useEffect(() => {
     authUser();
   }, [authUser]);
@@ -33,11 +35,10 @@ const App = () => {
       <Header currentUser={currentUser} />
       <div className="main">
         <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
+          <Route exact path="/" component={HomePage} />
           <Route path="/auth" component={Auth} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" render={login} />
+          <Redirect to="/" />
         </Switch>
       </div>
       <Footer />
