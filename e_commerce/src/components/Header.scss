@@ -51,12 +51,17 @@
         margin-right: 0;
       }
 
-      a {
+      a,
+      span {
         font-size: 1.8rem;
         line-height: 1;
-        color: black;
+        color: mintcream;
         text-decoration: none;
         text-transform: uppercase;
+
+        &:hover {
+          color: gold;
+        }
       }
     }
   }

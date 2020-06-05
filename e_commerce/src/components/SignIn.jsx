@@ -1,8 +1,14 @@
 import React from "react";
 import "./SignIn.scss";
 import Button from "./forms/Button";
+import { signInWithGoogle } from "../firebase/utils";
 
 const SignIn = () => {
+  const submit = async (e) => {
+    e.preventDefault();
+    console.log("hi");
+  };
+
   return (
     <div className="signIn">
       <div className="wrap">
@@ -10,10 +16,10 @@ const SignIn = () => {
       </div>
 
       <div className="formWrap">
-        <form>
+        <form onSubmit={submit}>
           <div className="socialSignIn">
             <div className="row">
-              <Button>Sign in with Google</Button>
+              <Button onClick={signInWithGoogle}>Sign in with Google</Button>
             </div>
           </div>
         </form>
