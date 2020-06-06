@@ -9,7 +9,7 @@ import Button from "./forms/Button";
 
 const SignUp = () => {
   // formik props
-  const { initialValues, validationSchema, onSubmit } = useFormikProps();
+  const { initialValues, validationSchema, submitRegister } = useFormikProps();
 
   return (
     <div className="signup">
@@ -19,7 +19,7 @@ const SignUp = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={onSubmit}
+          onSubmit={submitRegister}
         >
           <Form>
             <div className="formRow">

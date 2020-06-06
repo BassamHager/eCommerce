@@ -29,6 +29,7 @@ const App = () => {
   }, [setCurrentUser]);
 
   const login = () => (currentUser ? <Redirect to="/" /> : <Login />);
+  const signUp = () => (currentUser ? <Redirect to="/" /> : <Auth />);
 
   useEffect(() => {
     authUser();
@@ -40,7 +41,7 @@ const App = () => {
       <div className="main">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/auth" component={Auth} />
+          <Route path="/auth" render={signUp} />
           <Route path="/login" render={login} />
           <Redirect to="/" />
         </Switch>

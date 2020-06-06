@@ -25,4 +25,17 @@
       margin-top: 3rem auto 0;
     }
   }
+
+  .formRow {
+    margin: 25px auto 0;
+
+    .input {
+      display: block;
+      width: 100%;
+      font-size: 1.5rem;
+      line-height: 1;
+      padding: 10px 5px;
+      margin: 10px auto;
+    }
+  }
 }

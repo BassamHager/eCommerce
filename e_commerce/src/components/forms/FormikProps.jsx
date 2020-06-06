@@ -1,7 +1,7 @@
 // libraries
 import * as Yup from "yup";
 // configurations
-// import { auth, handleUserProfile } from "../../firebase/utils";
+import { auth, handleUserProfile } from "../../firebase/utils";
 
 export const useFormikProps = () => {
   const initialValues = {
@@ -20,8 +20,27 @@ export const useFormikProps = () => {
       .required("Required!"),
   });
 
-  const onSubmit = async (values) => {
-    console.log(values);
+  const submitRegister = async ({ displayName, email, password }) => {
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      handleUserProfile(user, { displayName });
+    } catch (error) {
+      console.log(error);
+      //   const errorCode = error.code;
+      //   const errorMessage = error.message;
+    }
   };
-  return { initialValues, validationSchema, onSubmit };
+
+  const submitLogin = async ({ email, password }) => {
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return { initialValues, validationSchema, submitRegister, submitLogin };
 };
