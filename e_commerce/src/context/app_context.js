@@ -4,19 +4,13 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const value = useMemo(
     () => ({
       currentUser,
       setCurrentUser,
-      email,
-      setEmail,
-      password,
-      setPassword,
     }),
-    [currentUser, email, password]
+    [currentUser]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

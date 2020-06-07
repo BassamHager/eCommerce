@@ -1,10 +1,27 @@
 import React from "react";
+// libraries
+import { Field, ErrorMessage } from "formik";
+// components
+import TextError from "./TextError";
 
-const Input = ({ handleChange, label, ...otherProps }) => {
+const Input = ({
+  htmlFor,
+  label,
+  placeholder,
+  fieldClassName,
+  divClassName,
+}) => {
   return (
-    <div className="formRow">
-      {label && <label>{label}</label>}
-      <input className="formInput" onChange={handleChange} {...otherProps} />
+    <div className={`formRow ${divClassName}`}>
+      <label htmlFor={htmlFor}>{label}</label>
+      <Field
+        className={`input ${fieldClassName}`}
+        type="text"
+        id={htmlFor}
+        name={htmlFor}
+        placeholder={placeholder}
+      />
+      <ErrorMessage name={htmlFor} component={TextError} />
     </div>
   );
 };

@@ -1,9 +1,13 @@
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 // libraries
 import * as Yup from "yup";
 // configurations
 import { auth, handleUserProfile } from "../../firebase/utils";
 
 export const useFormikProps = () => {
+  const [errMsg, setErrMsg] = useState("");
+
   const initialValues = {
     displayName: "",
     email: "",
@@ -30,8 +34,6 @@ export const useFormikProps = () => {
       handleUserProfile(user, { displayName });
     } catch (error) {
       console.log(error);
-      //   const errorCode = error.code;
-      //   const errorMessage = error.message;
     }
   };
 
@@ -40,7 +42,33 @@ export const useFormikProps = () => {
       await auth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       console.log(error);
+      setErrMsg(error.message);
     }
   };
-  return { initialValues, validationSchema, submitRegister, submitLogin };
+
+  const history = useHistory();
+  const resetPassword = async ({ email }) => {
+    try {
+      const config = {
+        url: "http://localhost:3000/login",
+      };
+
+      await auth.sendPasswordResetEmail(email, config);
+      await console.log("password reset");
+      history.push("/login");
+    } catch (error) {
+      setErrMsg(error.message);
+      console.log(error);
+      console.log("error!");
+    }
+  };
+
+  return {
+    initialValues,
+    validationSchema,
+    submitRegister,
+    submitLogin,
+    errMsg,
+    resetPassword,
+  };
 };

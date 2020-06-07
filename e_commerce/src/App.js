@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import Auth from "./pages/Auth";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
+import Recovery from "./pages/Recovery";
 // configurations
 import { auth, handleUserProfile } from "./firebase/utils";
 
@@ -43,6 +44,7 @@ const App = () => {
           <Route exact path="/" component={HomePage} />
           <Route path="/auth" render={signUp} />
           <Route path="/login" render={login} />
+          <Route path="/recovery" component={Recovery} />
           <Redirect to="/" />
         </Switch>
       </div>

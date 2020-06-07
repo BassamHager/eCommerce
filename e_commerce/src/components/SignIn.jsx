@@ -1,49 +1,33 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./SignIn.scss";
 // configurations
 import { signInWithGoogle } from "../firebase/utils";
 // libraries
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 // components
 import { useFormikProps } from "./forms/FormikProps";
-import TextError from "./forms/TextError";
 import Button from "./forms/Button";
+import AuthWrapper from "./AuthWrapper";
+import Input from "./forms/Input";
 
 const SignIn = () => {
   // formik props
-  const { initialValues, submitLogin } = useFormikProps();
+  const { initialValues, submitLogin, errMsg } = useFormikProps();
 
   return (
-    <div className="signIn">
-      <div className="wrap">
-        <h2>Login</h2>
-      </div>
-
+    <AuthWrapper headline="Log In">
       <Formik initialValues={initialValues} onSubmit={submitLogin}>
         <Form>
-          <div className="formRow">
-            <label htmlFor="email">E-Mail</label>
-            <Field
-              className="input"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Your email..."
-            />
-            <ErrorMessage name="email" component={TextError} />
-          </div>
+          {errMsg && <p className="error">{errMsg}</p>}
 
-          <div className="formRow">
-            <label htmlFor="password">Password</label>
-            <Field
-              className="input"
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Your password..."
-            />
-            <ErrorMessage name="password" component={TextError} />
-          </div>
+          <Input htmlFor="email" label="E-Mail" placeholder="Your email..." />
+
+          <Input
+            htmlFor="password"
+            label="Password"
+            placeholder="Your password..."
+          />
 
           <Button className="m_bottom">Log In</Button>
         </Form>
@@ -58,7 +42,11 @@ const SignIn = () => {
           </div>
         </form>
       </div>
-    </div>
+
+      <div className="links">
+        <Link to="/recovery">Reset Password</Link>
+      </div>
+    </AuthWrapper>
   );
 };
 

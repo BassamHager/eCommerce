@@ -1,80 +1,49 @@
 import React from "react";
 import "./SignUp.scss";
 // libraries
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 // components
 import { useFormikProps } from "./forms/FormikProps";
-import TextError from "./forms/TextError";
 import Button from "./forms/Button";
+import AuthWrapper from "./AuthWrapper";
+import Input from "./forms/Input";
 
 const SignUp = () => {
   // formik props
   const { initialValues, validationSchema, submitRegister } = useFormikProps();
 
   return (
-    <div className="signup">
-      <div className="wrap">
-        <h2>Sign Up</h2>
+    <AuthWrapper headline="Sign Up">
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={submitRegister}
+      >
+        <Form>
+          <Input
+            htmlFor="displayName"
+            label="Name"
+            placeholder="Your name..."
+          />
 
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={submitRegister}
-        >
-          <Form>
-            <div className="formRow">
-              <label htmlFor="displayName">Name</label>
-              <Field
-                className="input"
-                type="text"
-                id="displayName"
-                name="displayName"
-                placeholder="Your name..."
-              />
-              <ErrorMessage name="displayName" component={TextError} />
-            </div>
+          <Input htmlFor="email" label="E-Mail" placeholder="Your email..." />
 
-            <div className="formRow">
-              <label htmlFor="email">E-Mail</label>
-              <Field
-                className="input"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Your email..."
-              />
-              <ErrorMessage name="email" component={TextError} />
-            </div>
+          <Input
+            htmlFor="password"
+            label="Password"
+            placeholder="Your password..."
+          />
 
-            <div className="formRow">
-              <label htmlFor="password">Password</label>
-              <Field
-                className="input"
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Your password..."
-              />
-              <ErrorMessage name="password" component={TextError} />
-            </div>
+          <Input
+            htmlFor="confirmedPassword"
+            label="Confirm Password"
+            placeholder="Confirm your password..."
+          />
 
-            <div className="formRow">
-              <label htmlFor="confirmedPassword">Confirm Password</label>
-              <Field
-                className="input"
-                type="password"
-                id="confirmedPassword"
-                name="confirmedPassword"
-                placeholder="Confirm your password..."
-              />
-              <ErrorMessage name="confirmedPassword" component={TextError} />
-            </div>
-
-            <Button>Register</Button>
-          </Form>
-        </Formik>
-      </div>
-    </div>
+          <Button>Register</Button>
+        </Form>
+      </Formik>
+    </AuthWrapper>
   );
 };
 
