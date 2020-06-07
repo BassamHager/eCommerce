@@ -7,6 +7,7 @@ import TextError from "./TextError";
 const Input = ({
   htmlFor,
   label,
+  type,
   placeholder,
   fieldClassName,
   divClassName,
@@ -16,7 +17,7 @@ const Input = ({
       <label htmlFor={htmlFor}>{label}</label>
       <Field
         className={`input ${fieldClassName}`}
-        type="text"
+        type={type || "text"}
         id={htmlFor}
         name={htmlFor}
         placeholder={placeholder}

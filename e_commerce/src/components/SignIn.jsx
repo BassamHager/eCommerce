@@ -26,6 +26,7 @@ const SignIn = () => {
           <Input
             htmlFor="password"
             label="Password"
+            type="password"
             placeholder="Your password..."
           />
 

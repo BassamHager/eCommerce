@@ -34,6 +34,7 @@ export const useFormikProps = () => {
       handleUserProfile(user, { displayName });
     } catch (error) {
       console.log(error);
+      setErrMsg(error.message);
     }
   };
 

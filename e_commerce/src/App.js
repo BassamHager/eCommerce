@@ -12,6 +12,8 @@ import Login from "./pages/Login";
 import Recovery from "./pages/Recovery";
 // configurations
 import { auth, handleUserProfile } from "./firebase/utils";
+import Dashboard from "./pages/Dashboard";
+import SignUp from "./components/SignUp";
 
 const App = () => {
   const { currentUser, setCurrentUser } = useContext(AppContext);
@@ -20,7 +22,6 @@ const App = () => {
     auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await handleUserProfile(userAuth);
-        console.log(userRef);
         userRef.onSnapshot((snapshot) => {
           setCurrentUser({ id: snapshot.id, ...snapshot.data() });
         });
@@ -29,8 +30,7 @@ const App = () => {
     });
   }, [setCurrentUser]);
 
-  const login = () => (currentUser ? <Redirect to="/" /> : <Login />);
-  const signUp = () => (currentUser ? <Redirect to="/" /> : <Auth />);
+  const re_direct = (bool, Comp) => (bool ? <Redirect to="/" /> : <Comp />);
 
   useEffect(() => {
     authUser();
@@ -42,9 +42,13 @@ const App = () => {
       <div className="main">
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/auth" render={signUp} />
-          <Route path="/login" render={login} />
+          <Route path="/auth" render={() => re_direct(currentUser, SignUp)} />
+          <Route path="/login" render={() => re_direct(currentUser, Login)} />
           <Route path="/recovery" component={Recovery} />
+          <Route
+            path="/dashboard"
+            render={() => re_direct(!currentUser, Dashboard)}
+          />
           <Redirect to="/" />
         </Switch>
       </div>

@@ -10,7 +10,12 @@ import Input from "./forms/Input";
 
 const SignUp = () => {
   // formik props
-  const { initialValues, validationSchema, submitRegister } = useFormikProps();
+  const {
+    initialValues,
+    validationSchema,
+    submitRegister,
+    errMsg,
+  } = useFormikProps();
 
   return (
     <AuthWrapper headline="Sign Up">
@@ -20,6 +25,8 @@ const SignUp = () => {
         onSubmit={submitRegister}
       >
         <Form>
+          {errMsg && <p className="error">{errMsg}</p>}
+
           <Input
             htmlFor="displayName"
             label="Name"
@@ -31,12 +38,14 @@ const SignUp = () => {
           <Input
             htmlFor="password"
             label="Password"
+            type="password"
             placeholder="Your password..."
           />
 
           <Input
             htmlFor="confirmedPassword"
             label="Confirm Password"
+            type="password"
             placeholder="Confirm your password..."
           />
 
